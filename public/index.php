@@ -27,6 +27,7 @@ $count = mysqli_num_rows($result);
     // If result matched $myusername and $mypassword, table row must be 1 row
     if($count > 0 && $row['IsAdmin'] == 1) {
         $_SESSION['login_user'] = $row['Username'];
+        // storing globally the loggedUserID with is the UserID value in the row, this is gonna be useful for favourites
         $_SESSION['loggedUserId'] = $row['UserID'];
         header('Location: admin-dashboard.php');
     }

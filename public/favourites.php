@@ -94,11 +94,8 @@
                 </script>';
             while($row_fav = mysqli_fetch_assoc($result_fav)) {
                 if ($row_fav["UserID"] == $_SESSION['loggedUserId']) {
-                    echo '<script type="text/javascript">
-                        favData.push({
-                            ArtID: "'.$row_fav["ArtID"].'",
-                            isFav: "'.$row_fav["UserID"].'",
-                        });
+                    echo '<script type="text/javascript"> 
+                        favData.push("'.$row_fav["ArtID"].'");
                     </script>';
                 }
             }

@@ -82,9 +82,28 @@ function createActionsButtons(buttonsToCreate, id) {
 
   if (buttonsToCreate.includes('favourite')) {
     let favouriteIcon =  document.createElement("I");
-    let isArtFavourited = !!favData.find(fav => fav.ArtID === id)
-    favouriteIcon.className = `fa fa-heart ${isArtFavourited ? 'favourited' : ''}`
 
+    // find() searches into the favData array, it receives a function as parameter
+    // this function checks if the element inside favData is equal to the id of artData
+    // find() returns favID when this ArtID is inside the ArtTable
+    // the double negation transforms the number into boolean to make sure we pick a boolean corresponding to that number
+    // isArtFavorited stores true or false depending if it satisfies the condition in return
+    let isArtFavorited = !!favData.find(function (favId) {
+      return favId === id
+    })
+
+    let isfavouriteActive = ''
+
+    // if isArtFavorited is true (which means we have an art favorited in the artData table) do this
+    if (isArtFavorited) {
+      // set the isfavouriteActive to the CSS "favorited" class 
+      isfavouriteActive = 'favorited'
+    }
+    
+    // use the icon class "fa fa-heart " and the isfavouriteActive variable to set the CSS for the icon
+    favouriteIcon.className = "fa fa-heart " + isfavouriteActive;
+
+    // using a form to wrap our button to be able to use method POST
     let favouriteForm = document.createElement("FORM");
     favouriteForm.method = "POST"
     
@@ -93,8 +112,10 @@ function createActionsButtons(buttonsToCreate, id) {
     favouriteButton.type = "submit"
     favouriteButton.name = "favourite-art"
     
+    // in onClick we use cookies to know the ID of the artpiece clicked
     favouriteButton.onclick = () => {
-      document.cookie = `artToBeFavourited=${id}`;
+      // this is a way to save cookies in JS
+      document.cookie = "artToBeFavorited=" + id;
     }
     
     favouriteButton.appendChild(favouriteIcon);
