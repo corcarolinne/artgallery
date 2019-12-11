@@ -1,5 +1,6 @@
 <?php
     include('../private/session.php');
+    include('delete-record.php');
 ?>
 
 <!DOCTYPE html>

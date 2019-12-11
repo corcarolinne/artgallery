@@ -86,7 +86,7 @@
 
     <?php
 
-        $sql_fav = "SELECT * from favourites WHERE $row_fav["UserID"] == $_SESSION['loggedUserId']";
+        $sql_fav = "SELECT * from favourites  WHERE favourites.UserID = ".$_SESSION['loggedUserId'].";";
         // $result_fav is a row from favourites table
         $result_fav = mysqli_query($connection, $sql_fav);
 
@@ -110,7 +110,8 @@
         // query to show the art table for customer, containing the needed information for customer
         $sql = "SELECT arts.ArtID, arts.Title, artists.FirstName, artists.LastName, arts.ArtType
         FROM arts
-        INNER JOIN artists ON arts.ArtistID =  artists.ArtistID;";
+        INNER JOIN artists ON arts.ArtistID =  artists.ArtistID
+        ORDER BY arts.ArtID;";
         $result = mysqli_query($connection, $sql);
 
         // if it exists a row in this inner join table do this

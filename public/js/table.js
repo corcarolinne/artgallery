@@ -62,11 +62,24 @@ function createActionsButtons(buttonsToCreate, id) {
   if (buttonsToCreate.includes('delete')) {
     let deleteIcon = document.createElement("I");
     deleteIcon.className = "fa fa-trash"
+
+    // using a form to wrap our button to be able to use method POST
+    let deleteForm = document.createElement("FORM");
+    deleteForm.method = "POST"
+
     let deleteButton = document.createElement("BUTTON");
     deleteButton.className = "btn"
+    deleteButton.type = "submit"
+    deleteButton.name = "delete-record"
+    deleteButton.onclick = () => {
+      // this is a way to save cookies in JS
+      document.cookie = "artToBeDeleted=" + id;
+    }
+
     deleteButton.appendChild(deleteIcon);
+    deleteForm.appendChild(deleteButton);
     // putting button inside the div
-    actionsDiv.appendChild(deleteButton);
+    actionsDiv.appendChild(deleteForm);
   }
 
   if (buttonsToCreate.includes('edit')) {
