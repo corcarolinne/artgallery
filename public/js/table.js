@@ -45,6 +45,12 @@ function generateTable(table, data) {
 // function to find element that we need to mount our table
 function mountTableById(id, dataSource) {
   var table = document.getElementById(id);
+  
+  if (dataSource === undefined || dataSource === null || dataSource.length === 0) {
+    table.appendChild(document.createTextNode("No results."));
+    return
+  }  
+
   let data = Object.keys(dataSource[0]);
 
   //calling the functions

@@ -1,6 +1,6 @@
 <?php
     include('../private/session.php');
-    include('delete-record.php');
+    include('delete-record.php')
 ?>
 
 <!DOCTYPE html>
@@ -67,25 +67,6 @@
     <div class="headline-pages">
         <h1>Administrator Dashboard</h1>
         <h3>Use the search bar to navigate through art pieces and artists. Edit details by clicking on the buttons on Actions.</h3>
-    </div>
-
-    <!--Search Bar-->
-    <div class="search">
-        <form class="search-form">
-            <input type="text" placeholder="Search for art pieces, artists, types...">
-            <div class="search-buttons">
-                <div class="dropdown">
-                    <button class="dropdown" type="button" data-toggle="dropdown">Filter
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="#">Title</a></li>
-                    <li><a href="#">Artist</a></li>
-                    <li><a href="#">Type</a></li>
-                    </ul>
-                </div>
-                <input type="submit" value="Search">
-            </div>   
-        </form>
     </div>
 
     <!--Tables-->
