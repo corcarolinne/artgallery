@@ -52,8 +52,9 @@ function mountTableById(id, dataSource) {
   generateTable(table, dataSource);
 }
 
-// function to create buttons, receives the type of button we should create, returns a div with buttons
-function createActionsButtons(buttonsToCreate, id) {
+// function to create buttons, receives the type of button we should create, id from the row
+// it returns a div with buttons
+function createActionsButtons(buttonsToCreate, id, actionPrefix) {
 
   let actionsDiv = document.createElement("DIV");
   actionsDiv.className = "action-buttons"
@@ -70,10 +71,10 @@ function createActionsButtons(buttonsToCreate, id) {
     let deleteButton = document.createElement("BUTTON");
     deleteButton.className = "btn"
     deleteButton.type = "submit"
-    deleteButton.name = "delete-record"
+    deleteButton.name = "delete-" + actionPrefix
     deleteButton.onclick = () => {
       // this is a way to save cookies in JS
-      document.cookie = "artToBeDeleted=" + id;
+      document.cookie = actionPrefix + "ToBeDeleted=" + id;
     }
 
     deleteButton.appendChild(deleteIcon);
@@ -141,16 +142,16 @@ function createActionsButtons(buttonsToCreate, id) {
 } 
 
 // function receives table row and call function to create buttons inside the actions column, returns table row with buttons
-function insertActionsButtonsOnRow(tableRow) {
-  tableRow.Actions = createActionsButtons(tableRow.Actions, tableRow.ID);
+function insertActionsButtonsOnRow(tableRow, actionPrefix) {
+  tableRow.Actions = createActionsButtons(tableRow.Actions, tableRow.ID, actionPrefix);
   return tableRow;
 }
 
 // function receives array of objects with data, call a function to insert buttons for each row
 // and returns the tableData with everything together
-function insertActionButtonsOnTable(tableData) {
+function insertActionButtonsOnTable(tableData, actionPrefix) {
   for (let row of tableData) {
-    row = insertActionsButtonsOnRow(row);
+    row = insertActionsButtonsOnRow(row, actionPrefix);
   }
   return tableData;
 }
