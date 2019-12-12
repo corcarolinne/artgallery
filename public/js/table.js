@@ -161,3 +161,10 @@ function insertActionButtonsOnTable(tableData, actionPrefix) {
   }
   return tableData;
 }
+
+
+function filterTableData (tableData, filterValue, propToFilter) {
+  return tableData.filter(function (item) {
+      return item[propToFilter].includes(filterValue)
+  })
+}

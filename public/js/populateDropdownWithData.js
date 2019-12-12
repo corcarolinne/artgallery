@@ -10,9 +10,4 @@ function populateDropdownWithData(id, dataSource) {
         
         dropdown.appendChild(option);
     });
-
-    // <option value = "1">Ben Jamin</option>
-    // <option value = "2">Frida Kahlo</option>
-    // <option value = "3">Claude Monet</option>
-    // <option value = "4">Tarsila do Amaral</option>
 }
