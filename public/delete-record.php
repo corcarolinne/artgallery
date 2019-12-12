@@ -27,6 +27,7 @@ function deleteArt($art_id) {
 if(isset($_POST['delete-art'])) {
     $artToBeDeleted = $_COOKIE['artToBeDeleted'];
 
+    // calling function to delete art pieces by ArtID selected
     deleteArt($artToBeDeleted);
 }
 
@@ -35,15 +36,17 @@ if(isset($_POST['delete-artist'])) {
     $artistToBeDeleted = $_COOKIE['artistToBeDeleted'];
 
     $select_arts_from_artist = "SELECT ArtID from arts WHERE artistID='$artistToBeDeleted';";
-
     $arts_from_artist = mysqli_query($connection, $select_arts_from_artist);
 
+    // if we find any art piece from this artist in arts table
     if (mysqli_num_rows($arts_from_artist) > 0) {
         while($art = mysqli_fetch_assoc($arts_from_artist)) {
+            // call the function to delete this art using its ID
             deleteArt($art["ArtID"]);
         } 
     }
 
+    // otherwise, just delete artist in artist table
     $sql = "DELETE FROM artists WHERE ArtistID='$artistToBeDeleted'";
 
     $arts_from_artist = mysqli_query($connection, $sql);
