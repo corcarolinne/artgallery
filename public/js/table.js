@@ -94,27 +94,18 @@ function createActionsButtons(buttonsToCreate, id, actionPrefix) {
     editIcon.className = "fa fa-pencil"
 
     // using a form to wrap our button to be able to use method POST
-    let editForm = document.createElement("FORM");
-    editForm.method = "POST"
-    editForm.action = document.getElementById("go-to-edit-" + actionPrefix).href;
-    editForm.target = "_blank";
-    
     let editButton = document.createElement("BUTTON");
-    editButton.className = "btn"
-    editButton.type = "submit"
-    editButton.name = "edit-" + actionPrefix
 
     editButton.onclick = () => {
-      // this is a way to save cookies in JS
-      document.cookie = actionPrefix + "ToBeEdited=" + id;
       // document.getElementById("go-to-edit-" + actionPrefix).click()
-      //window.location.href = document.getElementById("go-to-edit-" + actionPrefix).href
+      window.location.replace(
+        document.getElementById("go-to-edit-" + actionPrefix).href
+         + "?" + actionPrefix + "ToBeEdited=" + id); 
     }
 
     editButton.appendChild(editIcon);
-    editForm.appendChild(editButton);
     // putting button inside the div
-    actionsDiv.appendChild(editForm);
+    actionsDiv.appendChild(editButton);
   }
 
   if (buttonsToCreate.includes('favourite')) {

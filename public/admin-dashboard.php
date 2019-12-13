@@ -1,7 +1,6 @@
 <?php
     include('../private/session.php');
     include('delete-record.php');
-    include('update2.php')
 ?>
 
 <!DOCTYPE html>
