@@ -42,6 +42,6 @@ if(isset($_POST['update-account'])) {
             WHERE UserID = '$loggedUserId';";
 
     $results = mysqli_query($connection, $sql);
-    header('Location: admin-dashboard.php');
+    echo "records added sucessfully";
 }    
 ?>
