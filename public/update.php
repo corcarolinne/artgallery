@@ -6,7 +6,6 @@ $last_name = "";
 $username = "";
 $email = "";
 $address = "";
-$password = "";
 
 // save the userID from the user logged in this variable to run the query
 $loggedUserId = $_SESSION['loggedUserId'];

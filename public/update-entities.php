@@ -7,9 +7,12 @@ $username = "";
 $email = "";
 $address = "";
 $password = "";
+$website = "";
+$title = "";
+$artist = "";
+$type = "";
 
 // to edit administrator accounts
-
 if(isset($_GET['adminToBeEdited'])){
     // save the id of this admin in the cookie
     $adminToBeEdited = $_GET['adminToBeEdited'];
@@ -50,7 +53,81 @@ if(isset($_GET['adminToBeEdited'])){
     
         $results = mysqli_query($connection, $sql);
         header('Location: admin-dashboard.php');
+    }   
+}
+// to edit artist details
+if(isset($_GET['artistToBeEdited'])){
+    $artistToBeEdited = $_GET['artistToBeEdited'];
+
+    // check if there's an art with this ID
+    $sql_checkArtistsTable = "SELECT * FROM artists WHERE ArtistID='$artistToBeEdited'";
+    $res_edit = mysqli_query($connection, $sql_checkArtistsTable);
+
+    
+    // die(var_dump(mysqli_num_rows($res_edit) > 0));
+    // if our query finds a row, update it
+    if (mysqli_num_rows($res_edit) > 0) {
+        while($artistData = mysqli_fetch_assoc($res_edit)) {
+            // set the variables to pick the user details
+            $first_name = $artistData["FirstName"];
+            $last_name = $artistData["LastName"];
+            $address = $artistData["Address"];
+            $website = $artistData["Website"];
+        } 
+    }
+
+    if(isset($_POST['update-artist'])) {
+
+        // Escape user inputs for security
+        $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
+        $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
+        $address = mysqli_real_escape_string($connection, $_POST['address']);
+        $website = mysqli_real_escape_string($connection, $_POST['website']);
+    
+        // Attempt to update record
+        $sql = "UPDATE artists
+                SET FirstName= '$first_name', LastName= '$last_name', Address= '$address',  Website= '$website'
+                WHERE ArtistID = '$artistToBeEdited';";
+    
+        $results = mysqli_query($connection, $sql);
+        header('Location: admin-dashboard.php');
+    }
+}    
+// to edit art piece details
+if(isset($_GET['artToBeEdited'])){
+    $artToBeEdited = $_GET['artToBeEdited'];
+
+    // check if there's an art with this ID
+    $sql_checkArtsTable = "SELECT * FROM arts WHERE ArtID='$artToBeEdited'";
+    $res_edit = mysqli_query($connection, $sql_checkArtsTable);
+
+    
+    // die(var_dump(mysqli_num_rows($res_edit) > 0));
+    // if our query finds a row, update it
+    if (mysqli_num_rows($res_edit) > 0) {
+        while($artData = mysqli_fetch_assoc($res_edit)) {
+            // set the variables to pick the user details
+            $title = $artData["Title"];
+            $artist = $artData["ArtistID"];
+            $type = $artData["ArtType"];
+        } 
+    }
+
+    if(isset($_POST['update-art'])) {
+
+        // Escape user inputs for security
+        $title = mysqli_real_escape_string($connection, $_POST['title']);
+        $artist = mysqli_real_escape_string($connection, $_POST['artist']);
+        $type = mysqli_real_escape_string($connection, $_POST['type']);
+    
+        // Attempt to update record
+        $sql = "UPDATE arts
+                SET Title= '$title', ArtistID= '$artist', ArtType= '$type'
+                WHERE ArtID = '$artToBeEdited';";
+
+        $results = mysqli_query($connection, $sql);
+        header('Location: admin-dashboard.php');
     }
     
-}   
+}  
 ?>
