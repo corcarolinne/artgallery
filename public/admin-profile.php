@@ -1,5 +1,6 @@
 <?php
     include('../private/session.php');
+    include('update.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,32 +60,32 @@
         <!--Form-->
         <div class="container-form">
             <h2>Your Account</h2>
-            <form action="/action_page.php">
+            <form method="POST">
                 <div class="form-group">
                     <label for="name">First Name:</label>
-                    <input type="name" class="form-control" placeholder="First name" name="first-name">
+                    <input type="name" class="form-control" placeholder="First name" name="first_name"  value="<?php echo $first_name; ?>">
                 </div>
                 <div class="form-group">
                     <label for="name">Last Name:</label>
-                    <input type="name" class="form-control" placeholder="Last name" name="last-name">
+                    <input type="name" class="form-control" placeholder="Last name" name="last_name" value="<?php echo $last_name; ?>">
                 </div>
                 <div class="form-group">
                     <label for="name">Username:</label>
-                    <input type="name" class="form-control" placeholder="Username" name="username">
+                    <input type="name" class="form-control" placeholder="Username" name="username" disabled value="<?php echo $username; ?>" disabled>
                 </div>
                 <div class="form-group">
                     <label for="name">Adress:</label>
-                    <input type="name" class="form-control" placeholder="Address" name="address">
+                    <input type="name" class="form-control" placeholder="Address" name="address" value="<?php echo $address; ?>">
                 </div>
                 <div class="form-group">
                     <label for="pwd">Email:</label>
-                    <input type="email" class="form-control" id="pwd" placeholder="youremail@domain.com" name="pwd">
+                    <input type="email" class="form-control" id="pwd" placeholder="youremail@domain.com" name="email" value="<?php echo $email; ?>" disabled>
                 </div>
                 <div class="form-group">
                     <label for="password">Password:</label>
-                    <input type="password" class="form-control" placeholder="password" name="password">
+                    <input type="password" class="form-control" placeholder="password" name="password" value="<?php echo $password; ?>">
                 </div>
-                <button type="submit" class="btn btn-default">Update Account</button>
+                <button type="submit" name="update-account" class="btn btn-default">Update Account</button>
             </form>
         </div>
     </div>    
