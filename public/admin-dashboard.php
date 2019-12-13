@@ -1,6 +1,7 @@
 <?php
     include('../private/session.php');
-    include('delete-record.php')
+    include('delete-record.php');
+    include('update2.php')
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +70,8 @@
         <h3>Use the search bar to navigate through art pieces and artists. Edit details by clicking on the buttons on Actions.</h3>
     </div>
 
+    <a id="go-to-edit-art" href="edit-art.php"> </a>
+
     <!--Tables-->
     <h2>Art Pieces</h2>
     <div class="tables">
@@ -106,6 +109,8 @@
         }
     ?>
     
+    <a id="go-to-edit-artist" href="edit-artist.php"> </a>
+
     <h2>Artists</h2>
     <div class="tables">
         <table class="table table-striped" id="artistTable"></table>
@@ -141,6 +146,8 @@
         }
     ?>
     
+    <a id="go-to-edit-admin" href="edit-admin.php"> </a>
+
     <h2>Administrator Accounts</h2>
     <div class="tables">
         <table class="table table-striped" id="adminTable"></table>
