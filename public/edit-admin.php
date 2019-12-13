@@ -1,6 +1,6 @@
 <?php
     include('../private/session.php');
-    include('update2.php');
+    include('update-entities.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,7 +85,7 @@
                     <label for="password">Password:</label>
                     <input type="password" class="form-control" placeholder="password" name="password" value="<?php echo $password; ?>">
                 </div>
-                <button type="submit" name="update2-account" class="btn btn-default">Update Account</button>
+                <button type="submit" name="update-admin" class="btn btn-default">Update Account</button>
             </form>
         </div>
     </div>    

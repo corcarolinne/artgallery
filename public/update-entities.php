@@ -33,6 +33,24 @@ if(isset($_GET['adminToBeEdited'])){
         } 
     }
 
+    if(isset($_POST['update-admin'])) {
+
+        //die(var_dump(isset($_POST['update-admin']));
+
+        // Escape user inputs for security
+        $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
+        $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
+        $password = mysqli_real_escape_string($connection, $_POST['password']);
+        $address = mysqli_real_escape_string($connection, $_POST['address']);
+    
+        // Attempt to update record
+        $sql = "UPDATE users
+                SET FirstName= '$first_name', LastName= '$last_name', Pass= '$password', Address= '$address'
+                WHERE UserID = '$adminToBeEdited';";
+    
+        $results = mysqli_query($connection, $sql);
+        header('Location: admin-dashboard.php');
+    }
     
 }   
 ?>

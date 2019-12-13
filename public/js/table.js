@@ -95,6 +95,7 @@ function createActionsButtons(buttonsToCreate, id, actionPrefix) {
 
     // using a form to wrap our button to be able to use method POST
     let editButton = document.createElement("BUTTON");
+    editButton.className = "btn"
 
     editButton.onclick = () => {
       // document.getElementById("go-to-edit-" + actionPrefix).click()
