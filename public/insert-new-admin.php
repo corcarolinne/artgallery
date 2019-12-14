@@ -24,7 +24,7 @@ if(isset($_POST['register-admin'])) {
     $res_e = mysqli_query($connection, $sql_checkEmail);
 
     // first, check if the required fields are not empty
-    if (empty($first_name) || empty($last_name) || empty($username) || empty($password)) {
+    if (empty($first_name) || empty($last_name) || empty($email) || empty($username) || empty($password)) {
       $empty_field_error = "This field is required"; 		
     }else{
       // if it's not empty, checking if there's not any other user with the same username or email

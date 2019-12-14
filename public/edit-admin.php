@@ -61,17 +61,23 @@
         <div class="container-form">
             <h2>Update Account</h2>
             <form method="POST">
-                <div class="form-group">
+            <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="name">First Name:</label>
-                    <input type="name" class="form-control" placeholder="First name" name="first_name"  value="<?php echo $first_name; ?>">
+                    <input type="name" class="form-control" placeholder="First name" name="first_name" value="<?php echo $first_name; ?>">
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
-                <div class="form-group">
+                <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="name">Last Name:</label>
                     <input type="name" class="form-control" placeholder="Last name" name="last_name" value="<?php echo $last_name; ?>">
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
                 <div class="form-group">
                     <label for="name">Username:</label>
-                    <input type="name" class="form-control" placeholder="Username" name="username" disabled value="<?php echo $username; ?>" disabled>
+                    <input type="name" class="form-control" placeholder="Username" name="username" value="<?php echo $username; ?>" disabled>
                 </div>
                 <div class="form-group">
                     <label for="name">Adress:</label>
@@ -79,11 +85,14 @@
                 </div>
                 <div class="form-group">
                     <label for="pwd">Email:</label>
-                    <input type="email" class="form-control" id="pwd" placeholder="youremail@domain.com" name="email" value="<?php echo $email; ?>" disabled>
+                    <input type="email" class="form-control" id="pwd" placeholder="theiremail@domain.com" name="email" value="<?php echo $email; ?>" disabled>
                 </div>
-                <div class="form-group">
+                <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="password">Password:</label>
-                    <input type="password" class="form-control" placeholder="password" name="password" value="<?php echo $password; ?>">
+                    <input type="password" class="form-control" placeholder="password" name="password">
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
                 <button type="submit" name="update-admin" class="btn btn-default">Update Account</button>
             </form>

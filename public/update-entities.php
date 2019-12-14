@@ -46,13 +46,17 @@ if(isset($_GET['adminToBeEdited'])){
         $password = mysqli_real_escape_string($connection, $_POST['password']);
         $address = mysqli_real_escape_string($connection, $_POST['address']);
     
-        // Attempt to update record
-        $sql = "UPDATE users
+        // first, check if the required fields are not empty
+        if (empty($first_name) || empty($last_name) || empty($password)) {
+            $empty_field_error = "This field is required"; 		
+        }else{
+            // Attempt insert query
+            $sql = "UPDATE users
                 SET FirstName= '$first_name', LastName= '$last_name', Pass= '$password', Address= '$address'
                 WHERE UserID = '$adminToBeEdited';";
-    
-        $results = mysqli_query($connection, $sql);
-        header('Location: admin-dashboard.php');
+            $results = mysqli_query($connection, $sql);
+            header('Location: admin-dashboard.php');
+        }
     }   
 }
 // to edit artist details
