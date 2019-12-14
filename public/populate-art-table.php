@@ -7,7 +7,7 @@ include('../private/db_connection_GCP.php');
 function displayArtTable() {
     global $connection;
     // this query is required to be able to show properly the arts table
-    $sql_fav = "SELECT * from favourites  WHERE favourites.UserID = ".$_SESSION['loggedUserId'].";";
+    $sql_fav = "SELECT * from carol_2018250.favourites  WHERE favourites.UserID = ".$_SESSION['loggedUserId'].";";
     // $result_fav is a row from favourites table
     $result_fav = mysqli_query($connection, $sql_fav);
 
@@ -30,8 +30,8 @@ function displayArtTable() {
 
     // query to show the art table for customer when there's nothing entered on search
     $sql = "SELECT arts.ArtID, arts.Title, artists.FirstName, artists.LastName, arts.ArtType
-    FROM arts
-    INNER JOIN artists ON arts.ArtistID =  artists.ArtistID
+    FROM carol_2018250.arts
+    INNER JOIN carol_2018250.artists ON arts.ArtistID =  artists.ArtistID
     ORDER BY arts.ArtID;";
    
     $result = mysqli_query($connection, $sql);

@@ -80,7 +80,7 @@
 
     <?php
 
-        $sql = "SELECT arts.ArtID, arts.Title, artists.FirstName, artists.LastName, arts.ArtType FROM arts INNER JOIN artists ON arts.ArtistID =  artists.ArtistID;";
+        $sql = "SELECT arts.ArtID, arts.Title, artists.FirstName, artists.LastName, arts.ArtType FROM carol_2018250.arts INNER JOIN carol_2018250.artists ON arts.ArtistID =  artists.ArtistID;";
         $result = mysqli_query($connection, $sql);
     
         if ($result) {  
@@ -117,7 +117,7 @@
 
     <?php
 
-        $sql = "SELECT * FROM artists;";
+        $sql = "SELECT * FROM carol_2018250.artists;";
         $result = mysqli_query($connection, $sql);
     
         if ($result) {  
@@ -153,7 +153,7 @@
     </div>
     <?php
 
-        $sql = "SELECT * FROM users WHERE isAdmin=1;";
+        $sql = "SELECT * FROM carol_2018250.users WHERE isAdmin=1;";
         $result = mysqli_query($connection, $sql);
     
         if ($result) {  

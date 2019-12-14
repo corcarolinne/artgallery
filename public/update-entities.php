@@ -18,7 +18,7 @@ if(isset($_GET['adminToBeEdited'])){
     $adminToBeEdited = $_GET['adminToBeEdited'];
 
     // check if there's an admin with this ID
-    $sql_checkUsersTable = "SELECT * FROM users WHERE UserID='$adminToBeEdited' AND isAdmin=1";
+    $sql_checkUsersTable = "SELECT * FROM carol_2018250.users WHERE UserID='$adminToBeEdited' AND isAdmin=1";
     $res_edit = mysqli_query($connection, $sql_checkUsersTable);
 
     
@@ -46,8 +46,8 @@ if(isset($_GET['adminToBeEdited'])){
         $password = mysqli_real_escape_string($connection, $_POST['password']);
         $address = mysqli_real_escape_string($connection, $_POST['address']);
     
-        $sql_checkUser = "SELECT * FROM users WHERE Username='$username'";
-        $sql_checkEmail = "SELECT * FROM users WHERE Email='$email'";
+        $sql_checkUser = "SELECT * FROM carol_2018250.users WHERE Username='$username'";
+        $sql_checkEmail = "SELECT * FROM carol_2018250.users WHERE Email='$email'";
         $res_u = mysqli_query($connection, $sql_checkUser);
         $res_e = mysqli_query($connection, $sql_checkEmail);
 
@@ -70,7 +70,7 @@ if(isset($_GET['adminToBeEdited'])){
                 $email_error = "Sorry, this email was already used"; 	
             }else{
                 // Attempt update query
-                $sql = "UPDATE users
+                $sql = "UPDATE carol_2018250.users
                         SET FirstName= '$first_name', LastName= '$last_name', Username= '$username', Pass= '$password', Address= '$address', Email= '$email'
                         WHERE UserID = '$adminToBeEdited';";
                 $results = mysqli_query($connection, $sql);
@@ -84,7 +84,7 @@ if(isset($_GET['artistToBeEdited'])){
     $artistToBeEdited = $_GET['artistToBeEdited'];
 
     // check if there's an art with this ID
-    $sql_checkArtistsTable = "SELECT * FROM artists WHERE ArtistID='$artistToBeEdited'";
+    $sql_checkArtistsTable = "SELECT * FROM carol_2018250.artists WHERE ArtistID='$artistToBeEdited'";
     $res_edit = mysqli_query($connection, $sql_checkArtistsTable);
 
     
@@ -113,7 +113,7 @@ if(isset($_GET['artistToBeEdited'])){
             $empty_field_error = "This field is required"; 		
         }else{
         // Attempt to update record
-            $sql = "UPDATE artists
+            $sql = "UPDATE carol_2018250.artists
             SET FirstName= '$first_name', LastName= '$last_name', Address= '$address',  Website= '$website'
             WHERE ArtistID = '$artistToBeEdited';";
                 // if the query is sucessful
@@ -130,7 +130,7 @@ if(isset($_GET['artToBeEdited'])){
     $artToBeEdited = $_GET['artToBeEdited'];
 
     // check if there's an art with this ID
-    $sql_checkArtsTable = "SELECT * FROM arts WHERE ArtID='$artToBeEdited'";
+    $sql_checkArtsTable = "SELECT * FROM carol_2018250.arts WHERE ArtID='$artToBeEdited'";
     $res_edit = mysqli_query($connection, $sql_checkArtsTable);
 
     
@@ -157,7 +157,7 @@ if(isset($_GET['artToBeEdited'])){
             $empty_field_error = "This field is required"; 		
         }else{
         // Attempt insert query execution
-            $sql = "UPDATE arts
+            $sql = "UPDATE carol_2018250.arts
                     SET Title= '$title', ArtistID= '$artist', ArtType= '$type'
                     WHERE ArtID = '$artToBeEdited';";
             // if the query is sucessful

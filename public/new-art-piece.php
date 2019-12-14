@@ -88,7 +88,7 @@
     
     <?php
 
-        $sql = "SELECT FirstName, LastName, ArtistID FROM artists;";
+        $sql = "SELECT FirstName, LastName, ArtistID FROM carol_2018250.artists;";
         $result = mysqli_query($connection, $sql);
     
         if ($result) {

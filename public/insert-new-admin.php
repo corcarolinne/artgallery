@@ -18,8 +18,8 @@ if(isset($_POST['register-admin'])) {
     $password = mysqli_real_escape_string($connection, $_POST['password']);
     $address = mysqli_real_escape_string($connection, $_POST['address']);
 
-    $sql_checkUser = "SELECT * FROM users WHERE Username='$username'";
-    $sql_checkEmail = "SELECT * FROM users WHERE Email='$email'";
+    $sql_checkUser = "SELECT * FROM carol_2018250.users WHERE Username='$username'";
+    $sql_checkEmail = "SELECT * FROM carol_2018250.users WHERE Email='$email'";
     $res_u = mysqli_query($connection, $sql_checkUser);
     $res_e = mysqli_query($connection, $sql_checkEmail);
 
@@ -34,7 +34,7 @@ if(isset($_POST['register-admin'])) {
         $email_error = "Sorry, this email was already used"; 	
       }else{
       // Attempt insert query
-          $sql = "INSERT INTO users (FirstName, LastName, Username, Pass, IsAdmin, Address, Email) VALUES ('$first_name','$last_name', '$username', '$password', '1', '$address', '$email')";
+          $sql = "INSERT INTO carol_2018250.users (FirstName, LastName, Username, Pass, IsAdmin, Address, Email) VALUES ('$first_name','$last_name', '$username', '$password', '1', '$address', '$email')";
           $results = mysqli_query($connection, $sql);
           header('Location: admin-dashboard.php');
       }

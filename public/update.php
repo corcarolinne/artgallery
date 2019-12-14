@@ -10,7 +10,7 @@ $password = "";
 
 // save the userID from the user logged in this variable to run the query
 $loggedUserId = $_SESSION['loggedUserId'];
-$sql_checkUserID = "SELECT * FROM users WHERE UserID='$loggedUserId'";
+$sql_checkUserID = "SELECT * FROM carol_2018250.users WHERE UserID='$loggedUserId'";
 
 $res_id = mysqli_query($connection, $sql_checkUserID);
 
@@ -40,8 +40,8 @@ if(isset($_POST['update-account'])) {
     $address = mysqli_real_escape_string($connection, $_POST['address']);
 
     // check if there's any user with this email or username
-    $sql_checkUser = "SELECT * FROM users WHERE Username='$username'";
-    $sql_checkEmail = "SELECT * FROM users WHERE Email='$email'";
+    $sql_checkUser = "SELECT * FROM carol_2018250.users WHERE Username='$username'";
+    $sql_checkEmail = "SELECT * FROM carol_2018250.users WHERE Email='$email'";
     $res_u = mysqli_query($connection, $sql_checkUser);
     $res_e = mysqli_query($connection, $sql_checkEmail);
 
@@ -64,7 +64,7 @@ if(isset($_POST['update-account'])) {
             $email_error = "Sorry, this email was already used"; 	
         }else{
             // Attempt update query
-            $sql = "UPDATE users
+            $sql = "UPDATE carol_2018250.users
                     SET FirstName= '$first_name', LastName= '$last_name', Username= '$username', Pass= '$password', Address= '$address', Email= '$email'
                      WHERE UserID = '$loggedUserId';";
             $results = mysqli_query($connection, $sql);

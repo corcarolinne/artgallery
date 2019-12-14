@@ -15,7 +15,7 @@ if(isset($_POST['register-art'])) {
         $empty_field_error = "This field is required"; 		
     }else{
       // Attempt insert query execution
-        $sql = "INSERT INTO arts (Title, ArtistID, ArtType) VALUES ('$title','$artist', '$type')";
+        $sql = "INSERT INTO carol_2018250.arts (Title, ArtistID, ArtType) VALUES ('$title','$artist', '$type')";
         // if the query is sucessful
         if(mysqli_query($connection, $sql)){
             header('Location: admin-dashboard.php');

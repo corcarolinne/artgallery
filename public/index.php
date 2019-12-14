@@ -14,7 +14,7 @@ $username= $_POST['username'];
 $pass= $_POST['password'];
 
 // create SQL statement
-$sql = "SELECT * FROM users WHERE Username='$username' and pass='$pass'";
+$sql = "SELECT * FROM carol_2018250.users WHERE Username='$username' and pass='$pass'";
 
 // Query database
 $result = mysqli_query($connection, $sql);

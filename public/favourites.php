@@ -85,7 +85,7 @@
 
     <?php
 
-        $sql_fav = "SELECT * from favourites";
+        $sql_fav = "SELECT * from carol_2018250.favourites";
         $result_fav = mysqli_query($connection, $sql_fav);
 
         if ($result_fav) {
@@ -102,9 +102,9 @@
         }
 
         $sql = "SELECT arts.ArtID, arts.Title, artists.FirstName, artists.LastName, arts.ArtType, favourites.ArtID, favourites.UserID
-        FROM favourites
-        INNER JOIN arts ON arts.ArtID = favourites.ArtID
-        INNER JOIN artists ON arts.ArtistID =  artists.ArtistID
+        FROM carol_2018250.favourites
+        INNER JOIN carol_2018250.arts ON arts.ArtID = favourites.ArtID
+        INNER JOIN carol_2018250.artists ON arts.ArtistID =  artists.ArtistID
         WHERE favourites.UserID = ".$_SESSION['loggedUserId'].";";
 
         $result = mysqli_query($connection, $sql);
