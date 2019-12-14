@@ -50,6 +50,12 @@
                         </ul>
                     </div>
                 </li>
+                <li><a href="logout.php">
+                    <button type="button" class="btn btn-default btn-sm">
+                    <span class="glyphicon glyphicon-log-out"></span> Log out
+                    </button>
+                </a>
+                </li>
             </ul>
         </div>
     </nav>

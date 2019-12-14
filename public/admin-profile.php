@@ -34,8 +34,8 @@
                 </a>
             </div>
             <ul class="nav navbar-nav navbar-right">
-                <li class="active"><a href="admin-dashboard.php">HOME</a></li> 
-                <li><a href="admin-profile.php">ACCOUNT</a></li>
+                <li><a href="admin-dashboard.php">HOME</a></li> 
+                <li class="active"><a href="admin-profile.php">ACCOUNT</a></li>
                 <li>
                     <div class="dropdown-create">
                         <button class="dropdown" type="button" data-toggle="dropdown">CREATE</button>
