@@ -6,6 +6,7 @@ $last_name = "";
 $username = "";
 $email = "";
 $address = "";
+$password = "";
 
 // save the userID from the user logged in this variable to run the query
 $loggedUserId = $_SESSION['loggedUserId'];
@@ -33,14 +34,41 @@ if(isset($_POST['update-account'])) {
 
     $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
     $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
+    $username = mysqli_real_escape_string($connection, $_POST['username']);
+    $email = mysqli_real_escape_string($connection, $_POST['email']);
     $password = mysqli_real_escape_string($connection, $_POST['password']);
     $address = mysqli_real_escape_string($connection, $_POST['address']);
 
-    // Attempt to update record
-    $sql = "UPDATE users
-            SET FirstName= '$first_name', LastName= '$last_name', Pass= '$password', Address= '$address'
-            WHERE UserID = '$loggedUserId';";
+    // check if there's any user with this email or username
+    $sql_checkUser = "SELECT * FROM users WHERE Username='$username'";
+    $sql_checkEmail = "SELECT * FROM users WHERE Email='$email'";
+    $res_u = mysqli_query($connection, $sql_checkUser);
+    $res_e = mysqli_query($connection, $sql_checkEmail);
 
-    $results = mysqli_query($connection, $sql);
+    // saving UserID corresponding to the result of the query of usernames
+    $row_u= mysqli_fetch_array($res_u);
+    $userID_from_username_check = $row_u['UserID'];
+
+    // saving UserID corresponding to the result of the query of emails
+    $row_e= mysqli_fetch_array($res_e);
+    $userID_from_email_check = $row_e['UserID'];
+
+    // first, check if the required fields are not empty
+    if (empty($first_name) || empty($last_name) || empty($email) || empty($username) || empty($password)) {
+        $empty_field_error = "This field is required";
+    }else{
+        // if it's not empty, checking if there's not any other user with the same username or email
+        if (mysqli_num_rows($res_u) > 0 && $userID_from_username_check !== $loggedUserId) {
+            $name_error = "Sorry, this username was already taken"; 	
+        }else if(mysqli_num_rows($res_e) > 0 && $userID_from_email_check !== $loggedUserId) {
+            $email_error = "Sorry, this email was already used"; 	
+        }else{
+            // Attempt update query
+            $sql = "UPDATE users
+                    SET FirstName= '$first_name', LastName= '$last_name', Username= '$username', Pass= '$password', Address= '$address', Email= '$email'
+                     WHERE UserID = '$loggedUserId';";
+            $results = mysqli_query($connection, $sql);
+        }
+    }
 }    
 ?>

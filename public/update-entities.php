@@ -38,8 +38,6 @@ if(isset($_GET['adminToBeEdited'])){
 
     if(isset($_POST['update-admin'])) {
 
-        //die(var_dump(isset($_POST['update-admin']));
-
         // Escape user inputs for security
         $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
         $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
