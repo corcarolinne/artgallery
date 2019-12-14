@@ -64,9 +64,12 @@
         <div class="container-form">
             <h2>Update Art</h2>
             <form method="POST">
-            <div class="form-group">
+            <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="name">Title:</label>
                     <input type="name" class="form-control" placeholder="Title" name="title" value="<?php echo $title; ?>">
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
                 <div class="form-group">
                     <label for="name">Artist:</label>

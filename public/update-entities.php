@@ -120,13 +120,21 @@ if(isset($_GET['artToBeEdited'])){
         $artist = mysqli_real_escape_string($connection, $_POST['artist']);
         $type = mysqli_real_escape_string($connection, $_POST['type']);
     
-        // Attempt to update record
-        $sql = "UPDATE arts
-                SET Title= '$title', ArtistID= '$artist', ArtType= '$type'
-                WHERE ArtID = '$artToBeEdited';";
-
-        $results = mysqli_query($connection, $sql);
-        header('Location: admin-dashboard.php');
+        // checking if requiered fields are not empty
+        if (empty($title)) {
+            $empty_field_error = "This field is required"; 		
+        }else{
+        // Attempt insert query execution
+            $sql = "UPDATE arts
+                    SET Title= '$title', ArtistID= '$artist', ArtType= '$type'
+                    WHERE ArtID = '$artToBeEdited';";
+            // if the query is sucessful
+            if(mysqli_query($connection, $sql)){
+                header('Location: admin-dashboard.php');
+            } else{
+                echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+            }
+        }
     }
     
 }  
