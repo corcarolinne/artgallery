@@ -6,6 +6,7 @@ $last_name = "";
 $username = "";
 $email = "";
 $address = "";
+$password = "";
 
 if(isset($_POST['register-admin'])) {
 
@@ -22,18 +23,24 @@ if(isset($_POST['register-admin'])) {
     $res_u = mysqli_query($connection, $sql_checkUser);
     $res_e = mysqli_query($connection, $sql_checkEmail);
 
-  // checking if there's not any other user with the same username or email
-    if (mysqli_num_rows($res_u) > 0) {
-      $name_error = "Sorry, this username was already taken"; 	
-    }else if(mysqli_num_rows($res_e) > 0){
-      $email_error = "Sorry, this email was already used"; 	
+    // first, check if the required fields are not empty
+    if (empty($first_name) || empty($last_name) || empty($username) || empty($password)) {
+      $empty_field_error = "This field is required"; 		
     }else{
-    // Attempt insert query execution
-    $sql = "INSERT INTO users (FirstName, LastName, Username, Pass, IsAdmin, Address, Email) VALUES ('$first_name','$last_name', '$username', '$password', '1', '$address', '$email')";
-         $results = mysqli_query($connection, $sql);
-         echo 'Saved!';
-         header('Location: admin-dashboard.php');
+      // if it's not empty, checking if there's not any other user with the same username or email
+      if (mysqli_num_rows($res_u) > 0) {
+        $name_error = "Sorry, this username was already taken"; 	
+      }else if(mysqli_num_rows($res_e) > 0){
+        $email_error = "Sorry, this email was already used"; 	
+      }else{
+      // Attempt insert query
+          $sql = "INSERT INTO users (FirstName, LastName, Username, Pass, IsAdmin, Address, Email) VALUES ('$first_name','$last_name', '$username', '$password', '1', '$address', '$email')";
+          $results = mysqli_query($connection, $sql);
+          header('Location: admin-dashboard.php');
+      }
     }
+
+  
 }
     
     

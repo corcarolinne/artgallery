@@ -55,35 +55,50 @@
         <div class="container-form">
             <h2>Create Administrator Account</h2>
             <form method="POST">
-                <div class="form-group">
+                <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="name">First Name:</label>
                     <input type="name" class="form-control" placeholder="First name" name="first_name" value="<?php echo $first_name; ?>">
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
-                <div class="form-group">
+                <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="name">Last Name:</label>
                     <input type="name" class="form-control" placeholder="Last name" name="last_name" value="<?php echo $last_name; ?>">
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
-                <div class="form-group" <?php if (isset($name_error)): ?> class="form_error" <?php endif ?>>
+                <div class="form-group" <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="name">Username:</label>
                     <input type="name" class="form-control" placeholder="Username" name="username" value="<?php echo $username; ?>">
                     <?php if (isset($name_error)): ?>
 	  	            <span><?php echo $name_error; ?></span>
+	                <?php endif ?>
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
 	                <?php endif ?>
                 </div>
                 <div class="form-group">
                     <label for="name">Adress:</label>
                     <input type="name" class="form-control" placeholder="Address" name="address" value="<?php echo $address; ?>">
                 </div>
-                <div class="form-group" <?php if (isset($email_error)): ?> class="form_error" <?php endif ?>>
+                <div class="form-group" <?php if (isset($name_error)): ?> class="form_error" <?php endif ?> <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="pwd">Email:</label>
                     <input type="email" class="form-control" id="pwd" placeholder="theiremail@domain.com" name="email" value="<?php echo $email; ?>">
                     <?php if (isset($email_error)): ?>
 	  	            <span><?php echo $email_error; ?></span>
 	                <?php endif ?>
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
-                <div class="form-group">
+                <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="password">Password:</label>
                     <input type="password" class="form-control" placeholder="password" name="password">
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
                 <button type="submit" name="register-admin" class="btn btn-default">Create Account</button>
             </form>
