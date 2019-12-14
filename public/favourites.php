@@ -58,25 +58,6 @@
         <h1>Your favourites list</h1>
     </div>
 
-    <!--Search Bar-->
-    <div class="search">
-        <form class="search-form">
-            <input type="text" placeholder="Search for art pieces, artists, types...">
-            <div class="search-buttons">
-                <div class="dropdown">
-                    <button class="dropdown" type="button" data-toggle="dropdown">Filter
-                    <span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                    <li><a href="#">Title</a></li>
-                    <li><a href="#">Artist</a></li>
-                    <li><a href="#">Type</a></li>
-                    </ul>
-                </div>
-                <input type="submit" value="Search">
-            </div>    
-        </form>
-    </div>
-
     <!--Table-->
     <div class="tables">
         <table class="table table-striped" id="favTable">
