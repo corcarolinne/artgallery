@@ -4,8 +4,8 @@
 ******************************************/
 
 // Credentials
-$dbhost = 'localhost';
-$dbuser = 'root';
+$dbhost = 'database-1.cptrcvahtkfl.eu-west-1.rds.amazonaws.com';
+$dbuser = 'carol_2018250';
 $dbpass = '13 Hatnephfcfati_';
 $dbname = 'carol_2018250';
 
