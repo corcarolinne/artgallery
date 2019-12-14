@@ -59,7 +59,7 @@
     <div class="container-contact">
         <!--Form-->
         <div class="container-form">
-            <h2>Update Account</h2>
+            <h2>Update Artist</h2>
             <form method="POST">
                 <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                         <label for="name">First Name:</label>
