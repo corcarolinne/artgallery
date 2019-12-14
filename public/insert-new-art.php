@@ -1,6 +1,8 @@
 <?php
 include('../private/db_connection_GCP.php');
 
+$title = "";
+
 if(isset($_POST['register-art'])) {
 
     // Escape user inputs for security
@@ -8,16 +10,18 @@ if(isset($_POST['register-art'])) {
     $artist = mysqli_real_escape_string($connection, $_POST['artist']);
     $type = mysqli_real_escape_string($connection, $_POST['type']);
 
-    // Attempt insert query execution
-    //$sql = "INSERT INTO user (fname, lname, username, email, password) VALUES ('$first_name', '$last_name', '$username' '$email)";
-    $sql = "INSERT INTO arts (Title, ArtistID, ArtType) VALUES ('$title','$artist', '$type')";
-
-
-    if(mysqli_query($connection, $sql)){
-        echo "Records added successfully.";
-        header('Location: admin-dashboard.php');
-    } else{
-        echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+    // checking if requiered fields are not empty
+    if (empty($title)) {
+        $empty_field_error = "This field is required"; 		
+    }else{
+      // Attempt insert query execution
+        $sql = "INSERT INTO arts (Title, ArtistID, ArtType) VALUES ('$title','$artist', '$type')";
+        // if the query is sucessful
+        if(mysqli_query($connection, $sql)){
+            header('Location: admin-dashboard.php');
+        } else{
+            echo "ERROR: Could not able to execute $sql. " . mysqli_error($connection);
+        }
     }
 
 }
