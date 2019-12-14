@@ -54,22 +54,31 @@
         <!--Form-->
         <div class="container-form">
             <h2>Create Artist</h2>
-            <form method="POST">
-                <div class="form-group">
+            <form method="POST"> 
+                <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="name">First Name:</label>
-                    <input type="name" class="form-control" placeholder="First name" name="first_name">
+                    <input type="name" class="form-control" placeholder="First name" name="first_name" value="<?php echo $first_name; ?>">
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
-                <div class="form-group">
+                <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="name">Last Name:</label>
-                    <input type="name" class="form-control" placeholder="Last name" name="last_name">
+                    <input type="name" class="form-control" placeholder="Last name" name="last_name" value="<?php echo $last_name; ?>">
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
                 <div class="form-group">
                     <label for="name">Adress:</label>
-                    <input type="name" class="form-control" placeholder="Address" name="address">
+                    <input type="name" class="form-control" placeholder="Address" name="address" value="<?php echo $address; ?>">
                 </div>
-                <div class="form-group">
+                <div class="form-group" <?php if (isset($empty_field_error)): ?> class="form_error" <?php endif ?>>
                     <label for="website">Website:</label>
-                    <input type="name" class="form-control" placeholder="artistwebsite.com" name="website">
+                    <input type="name" class="form-control" placeholder="artistwebsite.com" name="website" value="<?php echo $website; ?>">
+                    <?php if (isset($empty_field_error)): ?>
+	  	            <span><?php echo $empty_field_error; ?></span>
+	                <?php endif ?>
                 </div>
                 <button type="submit" name="register-artist" class="btn btn-default">Create Artist</button>
             </form>

@@ -174,6 +174,6 @@ function insertActionButtonsOnTable(tableData, actionPrefix) {
 
 function filterTableData (tableData, filterValue, propToFilter) {
   return tableData.filter(function (item) {
-      return item[propToFilter].includes(filterValue)
+      return item[propToFilter].toUpperCase().includes(filterValue.toUpperCase())
   })
 }
