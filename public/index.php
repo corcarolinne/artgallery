@@ -96,7 +96,8 @@
                 header('Location: customer-dashboard.php');
             }
             else {
-                $error = "Your Login Name or Password is invalid";
+                $error = "Your Login Name or Password is invalid!";
+                echo $error;
             }
         }
     ?>
