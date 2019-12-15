@@ -3,6 +3,7 @@
     include('insert-new-art.php');
 ?>
 
+<!--Page with the form to create a new art piece-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="./css/style.css">
 
-    <!--JS for Table-->
+    <!--JS-->
     <script src="./js/populateDropdownWithData.js"></script>
 
     <title>domus: Art Gallery</title>
@@ -62,6 +63,7 @@
 
     <div class="container-contact">
         <!--Form-->
+        <!--Using php in input tags to echo the value from user input and if an error occurs span a message-->
         <div class="container-form">
             <h2>Create Art Piece</h2>
             <form method="POST">

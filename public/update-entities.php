@@ -14,15 +14,13 @@ $type = "";
 
 // to edit administrator accounts
 if(isset($_GET['adminToBeEdited'])){
-    // save the id of this admin in the cookie
+    // save the id of this admin
     $adminToBeEdited = $_GET['adminToBeEdited'];
 
     // check if there's an admin with this ID
     $sql_checkUsersTable = "SELECT * FROM carol_2018250.users WHERE UserID='$adminToBeEdited' AND isAdmin=1";
     $res_edit = mysqli_query($connection, $sql_checkUsersTable);
 
-    
-    // die(var_dump(mysqli_num_rows($res_edit) > 0));
     // if our query finds a row, update it
     if (mysqli_num_rows($res_edit) > 0) {
         while($userData = mysqli_fetch_assoc($res_edit)) {
@@ -36,9 +34,10 @@ if(isset($_GET['adminToBeEdited'])){
         } 
     }
 
+    // if this button is clicked
     if(isset($_POST['update-admin'])) {
 
-        // Escape user inputs for security
+        // Escape user inputs for security, pick users input
         $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
         $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
         $username = mysqli_real_escape_string($connection, $_POST['username']);
@@ -46,6 +45,7 @@ if(isset($_GET['adminToBeEdited'])){
         $password = mysqli_real_escape_string($connection, $_POST['password']);
         $address = mysqli_real_escape_string($connection, $_POST['address']);
     
+        // select all from these tables where username and email are the same as users input
         $sql_checkUser = "SELECT * FROM carol_2018250.users WHERE Username='$username'";
         $sql_checkEmail = "SELECT * FROM carol_2018250.users WHERE Email='$email'";
         $res_u = mysqli_query($connection, $sql_checkUser);
@@ -69,7 +69,7 @@ if(isset($_GET['adminToBeEdited'])){
             }else if(mysqli_num_rows($res_e) > 0 && $userID_from_email_check !== $adminToBeEdited) {
                 $email_error = "Sorry, this email was already used"; 	
             }else{
-                // Attempt update query
+                // update query
                 $sql = "UPDATE carol_2018250.users
                         SET FirstName= '$first_name', LastName= '$last_name', Username= '$username', Pass= '$password', Address= '$address', Email= '$email'
                         WHERE UserID = '$adminToBeEdited';";
@@ -81,18 +81,17 @@ if(isset($_GET['adminToBeEdited'])){
 }
 // to edit artist details
 if(isset($_GET['artistToBeEdited'])){
+    // save the id of this artist
     $artistToBeEdited = $_GET['artistToBeEdited'];
 
-    // check if there's an art with this ID
+    // check if there's an artist with this ID
     $sql_checkArtistsTable = "SELECT * FROM carol_2018250.artists WHERE ArtistID='$artistToBeEdited'";
     $res_edit = mysqli_query($connection, $sql_checkArtistsTable);
 
-    
-    // die(var_dump(mysqli_num_rows($res_edit) > 0));
-    // if our query finds a row, update it
+    // if our query finds a row
     if (mysqli_num_rows($res_edit) > 0) {
         while($artistData = mysqli_fetch_assoc($res_edit)) {
-            // set the variables to pick the user details
+            // set the variables to pick the input
             $first_name = $artistData["FirstName"];
             $last_name = $artistData["LastName"];
             $address = $artistData["Address"];
@@ -100,15 +99,16 @@ if(isset($_GET['artistToBeEdited'])){
         } 
     }
 
+    // if this button is clicked
     if(isset($_POST['update-artist'])) {
 
-        // Escape user inputs for security
+        // Escape user inputs for security, pick users input
         $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
         $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
         $address = mysqli_real_escape_string($connection, $_POST['address']);
         $website = mysqli_real_escape_string($connection, $_POST['website']);
     
-        // checking if requiered fields are not empty
+        // checking if required fields are not empty
         if (empty($first_name) || empty($last_name) || empty($website)) {
             $empty_field_error = "This field is required"; 		
         }else{
@@ -127,27 +127,27 @@ if(isset($_GET['artistToBeEdited'])){
 }    
 // to edit art piece details
 if(isset($_GET['artToBeEdited'])){
+    // save the id of this art
     $artToBeEdited = $_GET['artToBeEdited'];
 
     // check if there's an art with this ID
     $sql_checkArtsTable = "SELECT * FROM carol_2018250.arts WHERE ArtID='$artToBeEdited'";
     $res_edit = mysqli_query($connection, $sql_checkArtsTable);
 
-    
-    // die(var_dump(mysqli_num_rows($res_edit) > 0));
-    // if our query finds a row, update it
+    // if our query finds a row
     if (mysqli_num_rows($res_edit) > 0) {
         while($artData = mysqli_fetch_assoc($res_edit)) {
-            // set the variables to pick the user details
+            // set the variables to pick the input
             $title = $artData["Title"];
             $artist = $artData["ArtistID"];
             $type = $artData["ArtType"];
         } 
     }
 
+    // if this button is clicked
     if(isset($_POST['update-art'])) {
 
-        // Escape user inputs for security
+        // Escape user inputs for security, pick users input
         $title = mysqli_real_escape_string($connection, $_POST['title']);
         $artist = mysqli_real_escape_string($connection, $_POST['artist']);
         $type = mysqli_real_escape_string($connection, $_POST['type']);
@@ -156,7 +156,7 @@ if(isset($_GET['artToBeEdited'])){
         if (empty($title)) {
             $empty_field_error = "This field is required"; 		
         }else{
-        // Attempt insert query execution
+        // Attempt to update
             $sql = "UPDATE carol_2018250.arts
                     SET Title= '$title', ArtistID= '$artist', ArtType= '$type'
                     WHERE ArtID = '$artToBeEdited';";

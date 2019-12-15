@@ -2,6 +2,7 @@
     include('insert-new-artist.php');
 ?>
 
+<!--Page with the form to create a new artist-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,6 +59,7 @@
 
     <div class="container-contact">
         <!--Form-->
+        <!--Using php in input tags to echo the value from user input and if an error occurs span a message-->
         <div class="container-form">
             <h2>Create Artist</h2>
             <form method="POST"> 

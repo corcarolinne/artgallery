@@ -8,9 +8,10 @@ $email = "";
 $address = "";
 $password = "";
 
+// if register button is clicked
 if(isset($_POST['register'])) {
 
-    // Escape user inputs for security
+    // Escape user inputs for security, pick user's input
     $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
     $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
     $username = mysqli_real_escape_string($connection, $_POST['username']);
@@ -18,6 +19,7 @@ if(isset($_POST['register'])) {
     $password = mysqli_real_escape_string($connection, $_POST['password']);
     $address = mysqli_real_escape_string($connection, $_POST['address']);
     
+    // select all from users table where username and email are the same as the user's input
     $sql_checkUser = "SELECT * FROM carol_2018250.users WHERE Username='$username'";
   	$sql_checkEmail = "SELECT * FROM carol_2018250.users WHERE Email='$email'";
   	$res_u = mysqli_query($connection, $sql_checkUser);
@@ -33,7 +35,7 @@ if(isset($_POST['register'])) {
       }else if(mysqli_num_rows($res_e) > 0){
         $email_error = "Sorry, this email was already used"; 	
       }else{
-      // Attempt insert query
+      // attempt to insert data
         $sql = "INSERT INTO carol_2018250.users (FirstName, LastName, Username, Pass, IsAdmin, Address, Email) VALUES ('$first_name','$last_name', '$username', '$password', '0', '$address', '$email')";
         $results = mysqli_query($connection, $sql);
         header('Location: index.php');

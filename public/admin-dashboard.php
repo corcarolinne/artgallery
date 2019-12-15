@@ -3,6 +3,7 @@
     include('delete-record.php');
 ?>
 
+<!--ADMINISTRATOR DASHBOARD-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +25,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="./css/style.css">
 
-    <!--JS for Table-->
+    <!--JS-->
     <script src="./js/table.js"></script>
     <script src="./js/adminDashboard.js"></script>
 
@@ -68,30 +69,30 @@
         <h1>Administrator Dashboard</h1>
         <h3>Use the search bar to navigate through art pieces and artists. Edit details by clicking on the buttons on Actions.</h3>
     </div>
-
+    <!-- Tag to identify the page to be redirected if the user clicks to edit art-->
     <a id="go-to-edit-art" href="edit-art.php"> </a>
-
-    <!--Tables-->
+    <!--Art Table-->
     <h2>Art Pieces</h2>
     <div class="tables">
         <table class="table table-striped" id="artTable">
         </table>
     </div>
-
+    <!--PHP connecting with database and collecting data for table-->
     <?php
-
+        // do a query to pick the right data and table head for arts table
         $sql = "SELECT arts.ArtID, arts.Title, artists.FirstName, artists.LastName, arts.ArtType FROM carol_2018250.arts INNER JOIN carol_2018250.artists ON arts.ArtistID =  artists.ArtistID;";
         $result = mysqli_query($connection, $sql);
     
+        // if there's any result
         if ($result) {  
-            //output table header
-            //echo "<table class='list'><tr><th>Username</th><th>Email</th><th>Password</th><th>&nbsp</th><th>&nbsp</th><th>&nbsp</th></tr>";
+            // using JS to create an array to save the data from art table
             echo '<script type="text/javascript">
                     var artData = []; 
                 </script>';
 
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
+                // using JS to populate the array
                 echo '<script type="text/javascript">
                         artData.push({
                             ID: "'.$row["ArtID"].'",
@@ -102,33 +103,34 @@
                         });
                     </script>';
             }
-
         } else {
             echo "0 results";
         }
     ?>
     
+    <!-- Tag to identify the page to be redirected if the user clicks to edit artist-->
     <a id="go-to-edit-artist" href="edit-artist.php"> </a>
-
+    <!--Artist Table-->
     <h2>Artists</h2>
     <div class="tables">
         <table class="table table-striped" id="artistTable"></table>
     </div>
-
+    <!--PHP connecting with database and collecting data for table-->
     <?php
-
+        // query to select all artists
         $sql = "SELECT * FROM carol_2018250.artists;";
         $result = mysqli_query($connection, $sql);
     
+        // if query returns any results
         if ($result) {  
-            //output table header
-            //echo "<table class='list'><tr><th>Username</th><th>Email</th><th>Password</th><th>&nbsp</th><th>&nbsp</th><th>&nbsp</th></tr>";
+            // create this array to store the data using JS
             echo '<script type="text/javascript">
                     var artistData = []; 
                 </script>';
 
-            // output data of each row
+            // while there's data
             while($row = mysqli_fetch_assoc($result)) {
+                // use JS to populate the array
                 echo '<script type="text/javascript">
                         artistData.push({
                             ID: "'.$row["ArtistID"].'",
@@ -139,32 +141,35 @@
                         });
                     </script>';
             }
-
         } else {
             echo "0 results";
         }
     ?>
-    
+
+    <!-- Tag to identify the page to be redirected if the user clicks to edit artist-->
     <a id="go-to-edit-admin" href="edit-admin.php"> </a>
 
+    <!-- Administrator Accounts Table-->
     <h2>Administrator Accounts</h2>
     <div class="tables">
         <table class="table table-striped" id="adminTable"></table>
     </div>
+    <!--PHP connecting with database and collecting data for table-->
     <?php
-
+        // query to pick all the administrator accounts from users table
         $sql = "SELECT * FROM carol_2018250.users WHERE isAdmin=1;";
         $result = mysqli_query($connection, $sql);
     
+        // if there's any result
         if ($result) {  
-            //output table header
-            //echo "<table class='list'><tr><th>Username</th><th>Email</th><th>Password</th><th>&nbsp</th><th>&nbsp</th><th>&nbsp</th></tr>";
+            // create an array using JS
             echo '<script type="text/javascript">
                     var adminData = []; 
                 </script>';
 
-            // output data of each row
+            // while there's a row
             while($row = mysqli_fetch_assoc($result)) {
+                // populate the array with the data
                 echo '<script type="text/javascript">
                         adminData.push({
                             ID: "'.$row["UserID"].'",
@@ -176,7 +181,6 @@
                         });
                     </script>';
             }
-
         } else {
             echo "0 results";
         }

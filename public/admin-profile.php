@@ -2,6 +2,8 @@
     include('../private/session.php');
     include('update.php');
 ?>
+
+<!--Administrator own profile, where they can see their profile details-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -58,6 +60,7 @@
 
     <div class="container-contact">
         <!--Form-->
+        <!--Using php in input tags to echo the value from user input and if an error occurs span a message-->
         <div class="container-form">
             <h2>Your Account</h2>
             <form method="POST">

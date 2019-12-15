@@ -2,6 +2,7 @@
 include('insert-new-customer.php');
 ?>
 
+<!--Page to create a new customer account-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -44,6 +45,7 @@ include('insert-new-customer.php');
 
     <div class="container-contact">
         <!--Form-->
+        <!--Using php in input tags to echo the value from user input and if an error occurs span a message-->
         <div class="container-form">
             <h2>Create Account</h2>
             <form method="POST">

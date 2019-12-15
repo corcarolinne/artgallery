@@ -10,8 +10,8 @@ $password = "";
 
 // save the userID from the user logged in this variable to run the query
 $loggedUserId = $_SESSION['loggedUserId'];
+// collect data from this user
 $sql_checkUserID = "SELECT * FROM carol_2018250.users WHERE UserID='$loggedUserId'";
-
 $res_id = mysqli_query($connection, $sql_checkUserID);
 
 // if we find any user with this id
@@ -28,10 +28,10 @@ if (mysqli_num_rows($res_id) > 0) {
     } 
 }
 
+// if this button is clicked
 if(isset($_POST['update-account'])) {
 
-    // Escape user inputs for security
-
+    // Escape user inputs for security, pick user's input
     $first_name = mysqli_real_escape_string($connection, $_POST['first_name']);
     $last_name = mysqli_real_escape_string($connection, $_POST['last_name']);
     $username = mysqli_real_escape_string($connection, $_POST['username']);

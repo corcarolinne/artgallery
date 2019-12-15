@@ -1,46 +1,4 @@
-<?php
-/*****************************************
-* This query uses the procedural interface
-******************************************/
-
-//start session
-session_start();
-include '../private/db_connection_GCP.php';
-
-//Check to see if the form (login section) has been submitted
- if($_SERVER["REQUEST_METHOD"] == "POST") 
-{
-$username= $_POST['username'];
-$pass= $_POST['password'];
-
-// create SQL statement
-$sql = "SELECT * FROM carol_2018250.users WHERE Username='$username' and pass='$pass'";
-
-// Query database
-$result = mysqli_query($connection, $sql);
-$row = mysqli_fetch_assoc($result);
-
-
-// count the number of records found
-$count = mysqli_num_rows($result);
-
-    // If result matched $myusername and $mypassword, table row must be 1 row
-    if($count > 0 && $row['IsAdmin'] == 1) {
-        $_SESSION['login_user'] = $row['Username'];
-        // storing globally the loggedUserID with is the UserID value in the row, this is gonna be useful for favourites
-        $_SESSION['loggedUserId'] = $row['UserID'];
-        header('Location: admin-dashboard.php');
-    }
-    elseif ($count > 0 && $row['IsAdmin'] == 0) {
-        $_SESSION['login_user'] = $row['Username'];
-        $_SESSION['loggedUserId'] = $row['UserID'];
-        header('Location: customer-dashboard.php');
-    }
-    else {
-        $error = "Your Login Name or Password is invalid";
-    }
-}
-?>
+<!--Firs Page / Login Page-->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -102,6 +60,45 @@ $count = mysqli_num_rows($result);
                 <button type="submit" class="btn btn-default">Submit</button>
             </form>
         </div>
-    
+
+    <!--Using PHP to do the login-->
+    <?php
+        //start session
+        session_start();
+        include '../private/db_connection_GCP.php';
+
+        // Check to see if the form (login section) has been submitted
+        if($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username= $_POST['username'];
+        $pass= $_POST['password'];
+
+        // create SQL statement
+        $sql = "SELECT * FROM carol_2018250.users WHERE Username='$username' and pass='$pass'";
+
+        // Query database
+        $result = mysqli_query($connection, $sql);
+        $row = mysqli_fetch_assoc($result);
+
+
+        // count the number of records found
+        $count = mysqli_num_rows($result);
+
+            // If result matched $myusername and $mypassword, table row must be 1 row
+            if($count > 0 && $row['IsAdmin'] == 1) {
+                $_SESSION['login_user'] = $row['Username'];
+                // storing globally the loggedUserID with is the UserID value in the row
+                $_SESSION['loggedUserId'] = $row['UserID'];
+                header('Location: admin-dashboard.php');
+            }
+            elseif ($count > 0 && $row['IsAdmin'] == 0) {
+                $_SESSION['login_user'] = $row['Username'];
+                $_SESSION['loggedUserId'] = $row['UserID'];
+                header('Location: customer-dashboard.php');
+            }
+            else {
+                $error = "Your Login Name or Password is invalid";
+            }
+        }
+    ?>
 </body>
 </html> 

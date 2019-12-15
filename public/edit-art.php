@@ -2,6 +2,7 @@
     include('../private/session.php');
     include('update-entities.php');
 ?>
+ <!--Page with the for form to edit art pieces-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -61,6 +62,7 @@
 
     <div class="container-contact">
         <!--Form-->
+        <!--Using php in input tags to echo the value from user input and if an error occurs span a message-->
         <div class="container-form">
             <h2>Update Art</h2>
             <form method="POST">
@@ -85,18 +87,23 @@
         </div>
     </div>
 
+     <!--Using PHP to put artists inside dropdown-->
     <?php
 
+        // query to pick data from artist table
         $sql = "SELECT FirstName, LastName, ArtistID FROM carol_2018250.artists;";
         $result = mysqli_query($connection, $sql);
     
+        // if finds any results
         if ($result) {
+            // use JS to make an array
             echo '<script type="text/javascript">
                     var artists = []; 
                 </script>';
 
-            // output data of each row
+            // output data for each row
             while($row = mysqli_fetch_assoc($result)) {
+                // use JS to populate the array with artist data
                 echo '<script type="text/javascript">
                         artists.push({
                             ID: "'.$row["ArtistID"].'",
@@ -104,11 +111,10 @@
                         });
                     </script>';
             }
-
+            // using JS to put data into the artist dropdown
             echo '<script type="text/javascript">
                 populateDropdownWithData("artistsSelect", artists);
             </script>';
-
         } else {
             echo "0 results";
         }

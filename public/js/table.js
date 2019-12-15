@@ -42,26 +42,32 @@ function generateTable(table, data) {
     }
   }
 }
-// function to find element that we need to mount our table
+// function to find table element that we need to mount the appropriate tables
+// the function receives the id of the <table> and an array that will contain the table data
 function mountTableById(id, dataSource) {
-  var table = document.getElementById(id);
-  
+  // save table ID
+  var table = document.getElementById(id); 
+  // if data inside the table doesn't exist "show the No results" message
   if (dataSource === undefined || dataSource === null || dataSource.length === 0) {
     table.appendChild(document.createTextNode("No results."));
     return
   }  
-
+  // set data variable to save the attributes of the data object
   let data = Object.keys(dataSource[0]);
 
-  //calling the functions
+  // calling the functions to generate table passing its ID
+  // passing the object attributes to the function that will mount the table head
   generateTableHead(table, data);
+  // passing the data to the function that will mount the table
   generateTable(table, dataSource);
 }
 
 // function to create buttons, receives the type of button we should create, id from the row
+// and an identifyer for the button that will depend on the type of table we have
 // it returns a div with buttons
 function createActionsButtons(buttonsToCreate, id, actionPrefix) {
 
+  // creates a div
   let actionsDiv = document.createElement("DIV");
   actionsDiv.className = "action-buttons"
   
@@ -74,41 +80,44 @@ function createActionsButtons(buttonsToCreate, id, actionPrefix) {
     let deleteForm = document.createElement("FORM");
     deleteForm.method = "POST"
 
+    // creating button
     let deleteButton = document.createElement("BUTTON");
     deleteButton.className = "btn"
     deleteButton.type = "submit"
+    // the button name it's gonna depend on the type of the identifyer we received by the function
     deleteButton.name = "delete-" + actionPrefix
+    // setting onClick function
     deleteButton.onclick = () => {
-      // this is a way to save cookies in JS
+      // using cookies to save the id of the data to be deleted and naming it using the id of the data clicked
       document.cookie = actionPrefix + "ToBeDeleted=" + id;
     }
 
+    // append icon to the button, button to the form and form to the div
     deleteButton.appendChild(deleteIcon);
     deleteForm.appendChild(deleteButton);
-    // putting button inside the div
     actionsDiv.appendChild(deleteForm);
   }
 
+  // doing the same as delete button but for edit
   if (buttonsToCreate.includes('edit')) {
     let editIcon =  document.createElement("I");
     editIcon.className = "fa fa-pencil"
-
-    // using a form to wrap our button to be able to use method POST
     let editButton = document.createElement("BUTTON");
     editButton.className = "btn"
 
+    // setting on click function
     editButton.onclick = () => {
-      // document.getElementById("go-to-edit-" + actionPrefix).click()
+      // redirects to form page indicated in <a> tag inside admin dashboard
+      // putting id of the data to be edited in the URL so PHP can pick it and edit the right data
       window.location.replace(
         document.getElementById("go-to-edit-" + actionPrefix).href
          + "?" + actionPrefix + "ToBeEdited=" + id); 
     }
-
     editButton.appendChild(editIcon);
-    // putting button inside the div
     actionsDiv.appendChild(editButton);
   }
 
+  // depending on the type described in Actions, include the right type of button
   if (buttonsToCreate.includes('favourite')) {
     let favouriteIcon =  document.createElement("I");
 
@@ -122,16 +131,13 @@ function createActionsButtons(buttonsToCreate, id, actionPrefix) {
     })
 
     let isfavouriteActive = ''
-
     // if isArtFavorited is true (which means we have an art favorited in the artData table) do this
     if (isArtFavorited) {
       // set the isfavouriteActive to the CSS "favorited" class 
       isfavouriteActive = 'favorited'
-    }
-    
+    } 
     // use the icon class "fa fa-heart " and the isfavouriteActive variable to set the CSS for the icon
     favouriteIcon.className = "fa fa-heart " + isfavouriteActive;
-
     // using a form to wrap our button to be able to use method POST
     let favouriteForm = document.createElement("FORM");
     favouriteForm.method = "POST"
@@ -149,7 +155,6 @@ function createActionsButtons(buttonsToCreate, id, actionPrefix) {
     
     favouriteButton.appendChild(favouriteIcon);
     favouriteForm.appendChild(favouriteButton);
-    // putting button inside the div
     actionsDiv.appendChild(favouriteForm);
   }
   // return the div with the buttons
@@ -162,18 +167,22 @@ function insertActionsButtonsOnRow(tableRow, actionPrefix) {
   return tableRow;
 }
 
-// function receives array of objects with data, call a function to insert buttons for each row
-// and returns the tableData with everything together
+// function receives array of objects with data and an identifyer for the type of data
+// returns the tableData with everything together
 function insertActionButtonsOnTable(tableData, actionPrefix) {
+  // calling a function to insert buttons for each row and identifyer
   for (let row of tableData) {
     row = insertActionsButtonsOnRow(row, actionPrefix);
   }
   return tableData;
 }
 
-
+// function to filter table data and do the search
+// receives an identifyer for the data on the table, the user input and the filer selected 
 function filterTableData (tableData, filterValue, propToFilter) {
+  // returns an array function (filter)
   return tableData.filter(function (item) {
+      // comparing user input with the array item and letting both in upper case to be case insensitive
       return item[propToFilter].toUpperCase().includes(filterValue.toUpperCase())
   })
 }

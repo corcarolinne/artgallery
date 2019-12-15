@@ -4,6 +4,7 @@
     include('populate-art-table.php');
 ?>
 
+<!--Customer Dashboard-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +26,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="./css/style.css">
 
-    <!--JS for Table-->
+    <!--JS-->
     <script src="./js/table.js"></script>
     <script src="./js/customerDashboard.js"></script>
 
@@ -84,6 +85,7 @@
         </table>
     </div>  
 
+    <!--Using php to call the function to display art table-->
     <?php
         displayArtTable();  
     ?>

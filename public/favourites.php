@@ -2,7 +2,7 @@
     include('../private/session.php');
     include('insert-favourite.php');
 ?>
-
+<!--Page with users Favourites-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +23,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="./css/style.css">
 
-    <!--JS for Table-->
+    <!--JS-->
     <script src="./js/table.js"></script>
     <script src="./js/favouritesTable.js"></script>
 
@@ -64,17 +64,23 @@
         </table>
     </div>
 
+    <!--Using PHP to pick data from favourites table in the database-->
     <?php
-
+        // query to collect data from favourites
         $sql_fav = "SELECT * from carol_2018250.favourites";
         $result_fav = mysqli_query($connection, $sql_fav);
 
+        // if find any results
         if ($result_fav) {
+            // create this array using JS
             echo '<script type="text/javascript">
                     var favData = []; 
                 </script>';
+            // for each row
             while($row_fav = mysqli_fetch_assoc($result_fav)) {
+                // if the user ID in favourites it's the same as the ID of the logged user
                 if ($row_fav["UserID"] == $_SESSION['loggedUserId']) {
+                    // populate array with the art favorited
                     echo '<script type="text/javascript"> 
                         favData.push("'.$row_fav["ArtID"].'");
                     </script>';
@@ -82,6 +88,7 @@
             }
         }
 
+        // pick data from database to display arts table
         $sql = "SELECT arts.ArtID, arts.Title, artists.FirstName, artists.LastName, arts.ArtType, favourites.ArtID, favourites.UserID
         FROM carol_2018250.favourites
         INNER JOIN carol_2018250.arts ON arts.ArtID = favourites.ArtID
@@ -90,15 +97,16 @@
 
         $result = mysqli_query($connection, $sql);
     
+        // if find any results
         if ($result) {  
-            //output table header
-            //echo "<table class='list'><tr><th>Username</th><th>Email</th><th>Password</th><th>&nbsp</th><th>&nbsp</th><th>&nbsp</th></tr>";
+            // create array using JS
             echo '<script type="text/javascript">
                     var artData = []; 
                 </script>';
 
             // output data of each row
             while($row = mysqli_fetch_assoc($result)) {
+                // populate array with art data
                 echo '<script type="text/javascript">
                         artData.push({
                             ID: "'.$row["ArtID"].'",
@@ -109,7 +117,6 @@
                         });
                     </script>';
             }
-
         } else {
             echo "0 results";
         }
